@@ -15,6 +15,8 @@ import { PAGES_ROUTES } from './pages.routes';
 // ng2-charts
 import { ChartsModule } from 'ng2-charts';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
+import { PromesasComponent } from './promesas/promesas.component';
+import { RxjsComponent } from './rxjs/rxjs.component';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { AccountSettingsComponent } from './account-settings/account-settings.co
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
-        AccountSettingsComponent
+        AccountSettingsComponent,
+        PromesasComponent,
+        RxjsComponent
     ],
     exports: [
         // Aquí van los componentes que quiero que estén disponibles para otros componentes fuera de este módulo
