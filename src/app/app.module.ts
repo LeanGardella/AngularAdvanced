@@ -11,7 +11,7 @@ import { APP_ROUTES } from './app.routes';
 
 // Modules
 import { PagesModule } from './pages/pages.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Servicios
 import { ServiceModule } from './services/service.module';
@@ -30,7 +30,8 @@ import { ServiceModule } from './services/service.module';
     APP_ROUTES,
     PagesModule,
     ServiceModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
