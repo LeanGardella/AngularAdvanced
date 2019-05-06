@@ -1,0 +1,55 @@
+<div class="row animated fadeIn">
+    <div class="col-lg-7">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Datos del perfil</h4>
+                <h6 class="card-subtitle">Nombre del usuario</h6>
+                <form ngNativeValidate #f="ngForm" (ngSubmit)="guardar(f.value)" class="form p-t-20">
+                    <div class="form-group">
+                        <label for="exampleInputuname">Nombre</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" name="nombre" [ngModel]="usuario.nombre" class="form-control" id="exampleInputuname" placeholder="Nombre">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputuname">Apellido</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-user"></i></div>
+                            <input type="text" name="apellido" [ngModel]="usuario.apellido" class="form-control" id="exampleInputuname" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Email</label>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i class="ti-email"></i></div>
+                            <input type="email" name="email" [disabled]="usuario.google" [ngModel]="usuario.email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save"></i> Guardar</button>
+                    <button type="submit" class="btn btn-inverse waves-effect waves-light">Cancelar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Foto de perfil</h4>
+                <h6 class="card-subtitle">algo de texto...</h6>
+                <div align="center">
+                    <img *ngIf="!imagenTemp" [src]="imagenSubir | imagen" alt="" class="w150">
+                    <img *ngIf="imagenTemp" [src]="imagenTemp " alt="" class="w150">
+                    <br><br>
+                </div>
+
+                <input (change)="subirImagen( $event.target.files[0])" type="file" name="" id="">
+
+                <br><br>
+                <button type="button" (click)="actualizarImagen()" [disabled]="!imagenSubir" class="btn btn-success waves-effect waves-light m-r-10"> <i class="fa fa-save"></i> Guardar</button>
+
+            </div>
+        </div>
+    </div>
+</div>

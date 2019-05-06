@@ -17,6 +17,9 @@ import { ChartsModule } from 'ng2-charts';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
 import { PromesasComponent } from './promesas/promesas.component';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { PipesModule } from '../pipes/pipes.module';
+import { ProfileComponent } from './profile/profile.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -28,7 +31,8 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         Graficas1Component,
         AccountSettingsComponent,
         PromesasComponent,
-        RxjsComponent
+        RxjsComponent,
+        ProfileComponent
     ],
     exports: [
         // Aquí van los componentes que quiero que estén disponibles para otros componentes fuera de este módulo
@@ -41,7 +45,10 @@ import { RxjsComponent } from './rxjs/rxjs.component';
         SharedModule,
         PAGES_ROUTES,
         ComponentsModule,
-        ChartsModule
+        ChartsModule,
+        PipesModule,
+        FormsModule,
+        CommonModule
     ]
 })
 
