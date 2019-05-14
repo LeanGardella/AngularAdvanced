@@ -1,0 +1,30 @@
+<div class="c-bg-black animated fadeIn" [ngClass]="_mu.oculto">
+    <div class="modal" style="display: block" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modal title</h5>
+                    <button type="button" class="close" (click)="dispose()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+                </div>
+                <div class="modal-body">
+                    <div align="center">
+                        <img *ngIf="!imagenTemp" [src]="'noimage' | imagen" alt="" class="w150">
+                        <img *ngIf="imagenTemp" [src]="imagenTemp " alt="" class="w150">
+                        <br><br>
+                    </div>
+
+                    <input (change)="subirImagen( $event.target.files[0])" type="file" name="" id="">
+
+                    <br><br>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="dispose()" class="btn btn-secondary">Cancelar</button>
+                    <button [disabled]="!imagenTemp" type="button" (click)="guardarImg()" class="btn btn-primary">Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

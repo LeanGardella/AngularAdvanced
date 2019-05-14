@@ -44,8 +44,8 @@ export class ProfileComponent implements OnInit {
       return;
     }
     this.imagenSubir = file;
-    let reader = new FileReader();
-    let urlImgTmp = reader.readAsDataURL(file);
+    const reader = new FileReader();
+    const urlImgTmp = reader.readAsDataURL(file);
 
     reader.onloadend = () => this.imagenTemp = reader.result;
   }

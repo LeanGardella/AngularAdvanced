@@ -95,7 +95,10 @@ export class UsuarioService {
     console.log(url);
     return this.http.put(url, usuario).pipe(map( (resp: any) => {
       console.log(resp);
-      this.guardar(resp.data.id, this.token, resp.data);
+
+      if ( this.usuario._id === usuario._id ) {
+        this.guardar(resp.data.id, this.token, resp.data);
+      }
       swal('¡Usuario actualizado!', `El usuario ${usuario.nombre} ${usuario.apellido} ha sido actualizado correctamente.`, 'success');
       return true;
     }));
@@ -111,5 +114,22 @@ export class UsuarioService {
     .catch(resp => {
       console.log(resp);
     });
+  }
+
+  cargarUsuarios(desde: number = 0) {
+    if (desde < 0) {
+      desde = 0;
+    }
+    const url = URL_SERVICIOS + '/usuario?desde=' + desde;
+    return this.http.get(url);
+  }
+
+  buscarUsuarios( termino: string ) {
+    return this.http.get(URL_SERVICIOS + '/buscar/collection/usuario/' + termino)
+      .pipe(map( (resp: any) => resp.data ));
+  }
+
+  borrarUsuario( id: string) {
+    return this.http.delete(`${URL_SERVICIOS}/usuario/${id}?token=${this.token}`);
   }
 }
