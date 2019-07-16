@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SubirArchivoService } from 'src/app/services/service.index';
-import { constants } from 'os';
+
 import { ModalUploadService } from './modal-upload.service';
 import swal from 'sweetalert';
 
@@ -38,7 +38,8 @@ export class ModalUploadComponent implements OnInit {
         this.dispose();
       })
       .catch( err => {
-        console.error('Error al subir imagen.' + err);
+        console.error('Error al subir imagen.');
+        console.log(err);
       });
   }
 

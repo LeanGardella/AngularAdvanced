@@ -21,6 +21,9 @@ import { PipesModule } from '../pipes/pipes.module';
 import { ProfileComponent } from './profile/profile.component';
 import { CommonModule } from '@angular/common';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { HospitalesComponent } from './hospitales/hospitales.component';
+import { MedicosComponent } from './medicos/medicos.component';
+import { MedicoComponent } from './medicos/medico.component';
 
 
 @NgModule({
@@ -34,7 +37,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
         PromesasComponent,
         RxjsComponent,
         ProfileComponent,
-        UsuariosComponent
+        UsuariosComponent,
+        HospitalesComponent,
+        MedicosComponent,
+        MedicoComponent
     ],
     exports: [
         // Aquí van los componentes que quiero que estén disponibles para otros componentes fuera de este módulo
