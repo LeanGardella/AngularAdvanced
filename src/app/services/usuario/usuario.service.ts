@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { HttpClient } from '@angular/common/http';
 import { URL_SERVICIOS } from '../../config/config';
-import { map } from 'rxjs/operators';
 import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
+
+
+import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
+import { map, catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -15,6 +19,7 @@ export class UsuarioService {
 
   usuario: Usuario;
   token: string;
+  menu: any[] = [];
 
   constructor(
     public http: HttpClient, 
@@ -31,6 +36,7 @@ export class UsuarioService {
     localStorage.removeItem('usuario');
     localStorage.removeItem('email');
     localStorage.removeItem('id');
+    localStorage.removeItem('menu');
     this.router.navigate(['/login']);
   }
 
@@ -42,24 +48,28 @@ export class UsuarioService {
     if (localStorage.getItem('token')) {
       this.usuario = JSON.parse(localStorage.getItem('usuario'));
       this.token = localStorage.getItem('token');
+      this.menu = JSON.parse(localStorage.getItem('menu'));
 
     } else {
       this.usuario = null;
       this.token = '';
+      this.menu = [];
     }
   }
 
-  guardar ( id: string, token: string, usuario: Usuario ) {
+  guardar ( id: string, token: string, usuario: Usuario, menu: any) {
     localStorage.setItem('id', id);
     localStorage.setItem('token', token);
     localStorage.setItem('usuario', JSON.stringify(usuario));
+    localStorage.setItem('menu', JSON.stringify(menu));
     this.usuario = usuario;
     this.token = token;
+    this.menu = menu;
   }
 
   loginGoogle(token: string) {
     const url = URL_SERVICIOS + '/login/google';
-    return this.http.post(url, {token}).pipe(map((resp: any) => this.guardar(resp.id, resp.token, resp.data)));
+    return this.http.post(url, {token}).pipe(map((resp: any) => this.guardar(resp.id, resp.token, resp.data, resp.menu)));
   }
 
   login(usuario: Usuario, recordar: boolean = false) { 
@@ -72,12 +82,14 @@ export class UsuarioService {
     }
 
     return this.http.post(url, usuario).pipe(map((resp: any) => {
-      // localStorage.setItem('id', resp.id);
-      // localStorage.setItem('token', resp.token);
-      // localStorage.setItem('usuario', JSON.stringify(resp.data));
-      this.guardar(resp.id, resp.token, resp.data);
+      this.guardar(resp.id, resp.token, resp.data, resp.menu);
       return true;
-    }));
+    }),
+    catchError( (err) => {
+      swal('Credenciales incorrectas', 'Correo y/o contraseña incorrecta.', 'error');
+      throw err;
+    })
+    );
   }
 
   crearUsuario(usuario: Usuario) {
@@ -87,7 +99,13 @@ export class UsuarioService {
         
         swal('¡Bienvenido!', `El usuario ${usuario.nombre} ${usuario.apellido} ha sido creado correctamente.`, 'success');
         return resp.usuario;
-      }));
+      }),
+      catchError( (err) => {
+        console.log(err);
+        swal(err.error.msg, err.error.err.message, 'error');
+        throw err;
+      })
+      );
   }
 
   actualizar( usuario: Usuario ) {
@@ -97,7 +115,7 @@ export class UsuarioService {
       console.log(resp);
 
       if ( this.usuario._id === usuario._id ) {
-        this.guardar(resp.data.id, this.token, resp.data);
+        this.guardar(resp.data.id, this.token, resp.data, this.menu);
       }
       swal('¡Usuario actualizado!', `El usuario ${usuario.nombre} ${usuario.apellido} ha sido actualizado correctamente.`, 'success');
       return true;
@@ -109,7 +127,7 @@ export class UsuarioService {
     this._subir.subirArchivo(file, 'usuario', id).then((resp: any) => {
       this.usuario.img = resp.data.img;
       swal('Imagen actualizada', 'La imagen de usuario se actualizó correctamente.', 'success');
-      this.guardar(id, this.token, this.usuario);
+      this.guardar(id, this.token, this.usuario, this.menu);
     })
     .catch(resp => {
       console.log(resp);

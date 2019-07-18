@@ -1,0 +1,82 @@
+<h3>
+    Resultados para: "{{buscado}}"
+</h3>
+<div class="row">
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Usuarios</h4>
+                <table class="table table-hover" *ngIf="usuarios.length !== 0">
+                    <tbody>
+                        <tr *ngFor="let u of usuarios">
+                            <td>
+                                <img [src]="u.img | imagen:'usuario'" alt="" class="rounded-circle img-50 img-circle">
+                            </td>
+                            <td>{{u.nombre}} {{u.apellido}}</td>
+                            <td>
+                                <button [routerLink]="['/usuario']" class="btn btn-primary">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="usuarios.length === 0">
+                    No hay registros.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Médicos</h4>
+                <table class="table table-hover" *ngIf="medicos.length !== 0">
+                    <tbody>
+                        <tr *ngFor="let m of medicos">
+                            <td>
+                                <img [src]="m.img | imagen:'medico'" alt="" class="rounded-circle img-50 img-circle">
+                            </td>
+                            <td>{{m.nombre}}</td>
+                            <td>
+                                <button [routerLink]="['/medico',m._id]" class="btn btn-primary">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="medicos.length === 0">
+                    No hay registros.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Hospitales</h4>
+                <table class="table table-hover" *ngIf="hospitales.length !== 0">
+                    <tbody>
+                        <tr *ngFor="let h of hospitales">
+                            <td>
+                                <img [src]="h.img | imagen:'hospital'" alt="" class="rounded-circle img-50 img-circle">
+                            </td>
+                            <td>{{h.nombre}}</td>
+                            <td>
+                                <button [routerLink]="['/hospital']" class="btn btn-primary">
+                                <i class="fa fa-eye"></i>
+                              </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="hospitales.length === 0">
+                    No hay registros.
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

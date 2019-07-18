@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Hospital } from '../../models/hospital.model';
 import { HospitalService } from '../../services/hospital/hospital.service';
 import { ModalUploadService } from '../../components/modal-upload/modal-upload.service';
-import swal from 'sweetalert';
+
+
 
 declare var swal: any;
 
