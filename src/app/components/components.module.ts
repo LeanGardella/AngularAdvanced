@@ -14,13 +14,11 @@ import { PipesModule } from '../pipes/pipes.module';
 @NgModule({
     declarations: [
         IncrementadorComponent,
-        GraficoDonaComponent,
-        ModalUploadComponent
+        GraficoDonaComponent
     ], 
     exports: [
         IncrementadorComponent,
-        GraficoDonaComponent,
-        ModalUploadComponent
+        GraficoDonaComponent
     ],
     imports: [
         FormsModule,

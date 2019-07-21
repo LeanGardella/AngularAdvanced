@@ -8,7 +8,7 @@ import { ModalUploadService } from '../components/modal-upload/modal-upload.serv
 import { MedicoService } from './medico/medico.service';
 import { HospitalService } from './hospital/hospital.service';
 
-import { LoginGuardGuard, AdminGuard } from './service.index';
+import { LoginGuardGuard, AdminGuard, TokenGuard } from './service.index';
 
 @NgModule({
   declarations: [],
@@ -22,7 +22,8 @@ import { LoginGuardGuard, AdminGuard } from './service.index';
     MedicoService,
     HospitalService,
     LoginGuardGuard,
-    AdminGuard
+    AdminGuard,
+    TokenGuard
   ],
   imports: [
     CommonModule,

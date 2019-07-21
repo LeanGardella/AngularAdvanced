@@ -14,15 +14,15 @@ import { MedicosComponent } from './medicos/medicos.component';
 import { MedicoComponent } from './medicos/medico.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 
-import { LoginGuardGuard, AdminGuard } from '../services/service.index';
-
+import { TokenGuard, AdminGuard } from '../services/service.index';
+ 
 const pagesRoutes: Routes =  [
-    {
-        path: '',
-        component: PagesComponent,
-        canActivate: [LoginGuardGuard],
-        children: [
-            {path: 'dashboard', component: DashboardComponent, data: {title: 'Dashboard'} },
+    // {
+    //     path: '',
+    //     component: PagesComponent,
+    //     canActivate: [LoginGuardGuard],
+    //     children: [
+            {path: 'dashboard', canActivate: [TokenGuard], component: DashboardComponent, data: {title: 'Dashboard'} },
             {path: 'progress', component: ProgressComponent, data: {title: 'Barra de progreso'} },
             {path: 'grafica1', component: Graficas1Component, data: {title: 'Gráficos'} },
             {path: 'promesas', component: PromesasComponent, data: {title: 'Promesas'} },
@@ -37,8 +37,8 @@ const pagesRoutes: Routes =  [
             {path: 'medico', component: MedicosComponent, data: {title: 'Mantenimiento de médicos'} },
             {path: 'medico/:id', component: MedicoComponent, data: {title: 'Mantenimiento de médicos'} },
             {path: '', redirectTo: '/dashboard', pathMatch: 'full' }
-        ]
-    }
+    //     ]
+    // }
 ];
 
 export const PAGES_ROUTES = RouterModule.forChild(pagesRoutes);

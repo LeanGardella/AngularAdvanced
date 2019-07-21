@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { PagesComponent } from './pages.component';
+
 
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
@@ -30,7 +30,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 @NgModule({
     declarations: [
         // Aquí van todos los componentes que quiera incluir
-        PagesComponent,
+        //PagesComponent,
         DashboardComponent,
         ProgressComponent,
         Graficas1Component,
@@ -46,7 +46,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     ],
     exports: [
         // Aquí van los componentes que quiero que estén disponibles para otros componentes fuera de este módulo
-        PagesComponent,
+       // PagesComponent,
         DashboardComponent,
         ProgressComponent,
         Graficas1Component

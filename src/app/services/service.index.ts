@@ -8,6 +8,7 @@ export { SharedService } from './shared/shared.service';
 
 export { LoginGuardGuard } from './guards/login-guard.guard';
 export { AdminGuard } from './guards/admin.guard';
+export { TokenGuard } from './guards/token.guard';
 
 
 

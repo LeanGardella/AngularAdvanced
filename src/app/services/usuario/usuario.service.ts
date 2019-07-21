@@ -6,9 +6,6 @@ import swal from 'sweetalert';
 import { Router } from '@angular/router';
 import { SubirArchivoService } from '../subirArchivo/subir-archivo.service';
 
-
-import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 import { map, catchError } from 'rxjs/operators';
 
 
@@ -149,5 +146,20 @@ export class UsuarioService {
 
   borrarUsuario( id: string) {
     return this.http.delete(`${URL_SERVICIOS}/usuario/${id}?token=${this.token}`);
+  }
+
+  renovarToken( ) {
+    const url = URL_SERVICIOS + '/login/renew?token=' + this.token;
+    return this.http.post(url, null)
+      .pipe(map((resp: any) => {
+        this.token = resp.token;  
+        localStorage.setItem('token', resp.token);
+        return true;
+      }),
+      catchError( (err) => {
+        console.log(err);
+        swal('Error de autenticación', 'Imposible realizar la renovación del token. Las credenciales provistas no son válidas.', 'error');
+        throw err;
+      }));
   }
 }
